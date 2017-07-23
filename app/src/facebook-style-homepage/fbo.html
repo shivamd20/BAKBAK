@@ -502,7 +502,14 @@ function myErrorHandler (e) {
 
 hasura.data.query({
   type: 'insert',
-  objects: [{"email":email,"password":pass}]},
+  objects: [
+             {
+               "title"   : "hello world",
+               "content" : "Your first program"
+             }
+           ],
+           "returning":["email"]
+        },
   mySuccessHandler,
   myErrorHandler
 );
