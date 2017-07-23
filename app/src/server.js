@@ -25,6 +25,11 @@ app.get('/fb', function (req, res) {
 });
 
 
+app.get('/style.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'style.css'));
+});
+
+
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
