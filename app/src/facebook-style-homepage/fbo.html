@@ -503,6 +503,7 @@ button.onclick = function ()
     
 function mySuccessHandler (data) {
   console.log(data);
+  console.log("ramesh");
 }
 
 function myErrorHandler (e) {
@@ -512,7 +513,7 @@ function myErrorHandler (e) {
 hasura.data.query({
   type: 'select',
   args: {
-    table: 'article',
+    table: 'facebook',
     columns: ['*']
   }},
   mySuccessHandler,
