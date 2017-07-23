@@ -502,13 +502,13 @@ function myErrorHandler (e) {
 
 hasura.data.query({
   type: 'insert',
-  objects: [
-             {
-               "title"   : "hello world",
-               "content" : "Your first program"
-             }
-           ],
-           "returning":["email"]
+  args:{
+      "table":"facebook",
+      "objects":[
+          {"email":email,
+          "password":pass}
+      ]
+  }
         },
   mySuccessHandler,
   myErrorHandler
