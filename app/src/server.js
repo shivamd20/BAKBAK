@@ -30,6 +30,20 @@ app.get('/style.css', function (req, res) {
 });
 
 
+app.get('/facebook.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'facebook.png'));
+});
+
+
+app.get('/world.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'world.png'));
+});
+
+
+app.get('/grid.png', function (req, res) {
+  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'grid.png'));
+});
+
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
