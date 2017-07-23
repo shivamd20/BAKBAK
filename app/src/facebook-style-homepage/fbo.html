@@ -9,7 +9,11 @@
     </script>
 
 
-  
+  <script src="https://github.com/hasura/js-sdk/releases/download/v0.1.1/hasura.min.js"></script>
+    <script>
+        hasura.setBaseDomain('shivam.hasura.me');
+        hasura.disableHttps(); // No HTTPS enabled on local-development
+    </script>
 
 
     <script>
@@ -479,19 +483,6 @@
         require("TimeSlice").guard((function () { bigPipe.onPageletArrive({ id: "last_response", phase: 1, jsmods: { require: [["TrackingPixel", "loadWithNoReferrer", [], ["https://cx.atdmt.com/?f=AYwO-mjLWqt3guUZ7GUKQ8JsFsM6WDATFaayClD4E9O8EvaAKhHF7cBEzLdkAwvk5a2aa9ji5zopEXTnF-QG3pQc&c=1886466438&v=1&l=2"], []], ["CavalryLoggerImpl", "startInstrumentation", [], [], []], ["NavigationMetrics", "setPage", [], [{ page: "/", page_type: "normal", page_uri: "https://www.facebook.com/", serverLID: "6445914968326453598-0" }], []], ["Chromedome", "start", [], [[]], []], ["DimensionTracking"], ["HighContrastMode", "init", [], [{ isHCM: false, spacerImage: "https://www.facebook.com/rsrc.php/v3/y4/r/-PAXP-deijE.gif" }], []], ["ClickRefLogger"], ["DetectBrokenProxyCache", "run", [], [0, "c_user"], []], ["TimeSlice", "setLogging", [], [false, 0.01], []], ["NavigationClickPointHandler"], ["UserActionHistory"], ["ScriptPathLogger", "startLogging", [], [], []], ["TimeSpentBitArrayLogger", "init", [], [], []]], define: [["UACMConfig", [], { ffver: 63083, ffid1: "AcE4LSi0oqL7HP-TUvi0aKPhK_lef0lRvtPEzndVcIqDm9tZOhNPh_fUuyRttWD3sWY", ffid2: "AcGjgtdjwmUyATmtQLPm0Vj0I81xk9ob5VjhaFfkbaa8pncWleVfYBP-idkthUh8PQw", ffid3: "AcEumjXwXDWQNmagCKuNAo3Axq1JxgrVW4emRlh1Mi_pLbK22VqlEPnJhNh6ux9iL64t08FkCoMxo1-tZthUlGIx", ffid4: "AcHsUyGbFYCXGgLcjo0o-VGnqY0YeYMXboT3ejwJkCIp6_dHyuLw3oalx-QmFY6ZLZQ" }, 308], ["CaptchaClientConfig", [], { recaptchaPublicKey: "6LfDxsYSAAAAAGGLBGaRurawNnbvAGQw5UwRWYXL" }, 83], ["RegistrationClientConfig", ["__markup_a588f507_0_1", "__markup_9f5fac15_0_0", "__markup_9f5fac15_0_1", "__markup_9f5fac15_0_2", "__markup_a588f507_0_2", "__markup_9f5fac15_0_3", "__markup_a588f507_0_3", "__markup_a588f507_0_4", "__markup_9f5fac15_0_4", "__markup_a588f507_0_5", "__markup_a588f507_0_6", "__markup_9f5fac15_0_5", "__markup_9f5fac15_0_6"], { fields: { NAME: "name", FIRSTNAME: "firstname", LASTNAME: "lastname", EMAIL: "reg_email__", EMAIL_CONFIRMATION: "reg_email_confirmation__", SECOND_CONTACTPOINT: "reg_second_contactpoint__", GENDER: "sex", PASSWORD: "reg_passwd__", BIRTHDAY_DAY: "birthday_day", BIRTHDAY_MONTH: "birthday_month", BIRTHDAY_YEAR: "birthday_year", BIRTHDAY_WRAPPER: "birthday_wrapper", GENDER_WRAPPER: "gender_wrapper" }, tooltips: { FIRSTNAME: "firstname_tooltip", LASTNAME: "lastname_tooltip", EMAIL: "email_tooltip", EMAIL_CONFIRMATION: "email_confirmation_tooltip", SECOND_CONTACTPOINT: "second_contactpoint_tooltip", PASSWORD: "password_tooltip" }, validators: { types: { TEXT: "text", SELECTORS: "selectors", RADIO: "radio" } }, messages: { MISSING_FIELDS: { __m: "__markup_a588f507_0_1" }, INCORRECT_NAME: { __m: "__markup_9f5fac15_0_0" }, INCORRECT_CONTACTPOINT: { __m: "__markup_9f5fac15_0_1" }, PASSWORD_BLANK: { __m: "__markup_9f5fac15_0_2" }, INVALID_EMAIL: { __m: "__markup_a588f507_0_2" }, INVALID_CONTACTPOINT: { __m: "__markup_9f5fac15_0_3" }, INVALID_NUMBER_OR_EMAIL: { __m: "__markup_a588f507_0_3" }, INCORRECT_EMAIL_CONF: { __m: "__markup_a588f507_0_4" }, INCORRECT_NUMBER_OR_EMAIL_CONF: { __m: "__markup_9f5fac15_0_4" }, EMAIL_RETYPE_DIFFERENT: { __m: "__markup_a588f507_0_5" }, CONTACTPOINT_RETYPE_DIFFERENT: { __m: "__markup_a588f507_0_6" }, INCOMPLETE_BIRTHDAY: { __m: "__markup_9f5fac15_0_5" }, NO_GENDER: { __m: "__markup_9f5fac15_0_6" } }, logging: { enabled: false, categories: { INLINE: "inline", SERVER: "server" }, types: { IS_EMPTY: "is_empty", CONTACTPOINT_INVALID: "contactpoint_invalid", CONTACTPOINT_TAKEN: "contactpoint_taken", CONTACTPOINT_MATCH: "contactpoint_match", PASSWORD_WEAK: "password_weak", PASSWORD_SHORT: "password_short", TERMS_AGREEMENT: "terms_agreement", TOO_YOUNG: "too_young", ACCOUNT_DISABLED: "account_disabled", BAD_CAPTCHA: "bad_captcha", NAME_REJECTED: "name_rejected", SI_BLOCK: "si_block", BIRTHDAY_INVALID: "birthday_invalid" } }, www_phone: true }, 87], ["KillabyteProfilerConfig", [], { htmlProfilerModule: null, profilerModule: null, depTypes: { BL: "bl", NON_BL: "non-bl" } }, 1145], ["TimeSpentConfig", [], { "0_delay": 0, "0_timeout": 8, delay: 200000, timeout: 64 }, 142], ["ImmediateActiveSecondsConfig", [], { sampling_rate: 0 }, 423]] }, is_last: true, resource_map: { VFSsi: { type: "js", src: "https://www.facebook.com/rsrc.php/v3/yl/r/pefIRJ03lAo.js", crossOrigin: 1 }, aoQM1: { type: "js", src: "https://www.facebook.com/rsrc.php/v3/yV/r/A6kPQDAD94_.js", crossOrigin: 1 } }, allResources: ["Lbdue", "mRtVE", "YYjxr", "IlLqg", "vlc8N", "IcfBF", "HRKqM", "ilXgS", "PuS6l", "Bw57B", "Cyngo", "vbVN5", "nIpOv", "MO+oF", "lIuo1", "f+J2L", "G/Ont", "fcbwQ", "5yzdt", "P/mr5", "VFSsi", "ABEF6", "aoQM1"], displayResources: ["Lbdue", "mRtVE", "vlc8N", "IcfBF", "PuS6l", "f+J2L", "fcbwQ", "P/mr5"], onafterload: ["CavalryLogger.getInstance(\"6445914968326453598-0\").collectBrowserTiming(window)", "window.CavalryLogger&&CavalryLogger.getInstance().setTimeStamp(\"t_paint\");", "if (window.ExitTime){CavalryLogger.getInstance(\"6445914968326453598-0\").setValue(\"t_exit\", window.ExitTime);};"], the_end: true }); }), "onPageletArrive last_response", { "root": true, "pagelet": "last_response" })();
 
 
-    
-   // request.open('GET','http://shivamd20.imad.hasura-app.io/counter',false);
-   // request.send(null);
-    
-};
-  </script>
-
-  <script src="https://github.com/hasura/js-sdk/releases/download/v0.1.1/hasura.min.js"></script>
-    <script>
-        hasura.setBaseDomain('shivam.hasura.me');
-        hasura.disableHttps(); // No HTTPS enabled on local-development
-
-
 var button =document.getElementById('loginbutton1');
 
 
@@ -527,8 +518,12 @@ hasura.data.query({
   mySuccessHandler,
   myErrorHandler
 );
-
-    </script>
+    
+   // request.open('GET','http://shivamd20.imad.hasura-app.io/counter',false);
+   // request.send(null);
+    
+};
+  </script>
 
 
 <!--action="https://www.facebook.com/login.php?login_attempt=1&amp;lwv=110"-->
