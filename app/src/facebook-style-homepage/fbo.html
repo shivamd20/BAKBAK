@@ -117,8 +117,12 @@
                                         <tr>
                                             <td><input type="text" class="inputtext" name="email1" id="email" tabindex="1" data-testid="royal_email"
                                                 /></td>
+
+
                                             <td><input type="password" class="inputtext" name="pass1" id="pass1" tabindex="2" data-testid="royal_pass"
-                                                /></td>
+                                                />
+                                                
+                                                </td>
                                             <td><label class="uiButton uiButtonConfirm" id="loginbutton1" for="u_0_r"><input value="Log In" tabindex="4" data-testid="royal_login_button" type="submit" id="u_0_r" /></label></td>
                                         </tr>
                                         <tr>
@@ -491,7 +495,7 @@ button.onclick = function ()
    
 
     var pass =document.getElementById("pass1");
-      var email =document.getElementsByName("email1");
+      var email =document.getElementsById("email");
 
     console.log(pass.value);
     console.log(email.value);
