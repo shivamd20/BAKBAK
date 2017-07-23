@@ -15,9 +15,9 @@ app.get('/', function (req, res) {
 });
 
 
-app.get('/facebook', function (req, res) {
-  res.sendFile(path.join(__dirname, 'ui', 'Facebook.htm'));
-});
+// app.get('/facebook', function (req, res) {
+//   res.sendFile(path.join(__dirname, 'ui', 'Facebook.htm'));
+// });
 
 
 app.get('/fb', function (req, res) {
@@ -45,7 +45,7 @@ app.get('/grid.png', function (req, res) {
 });
 
 
-app.get('/fbo.html', function (req, res) {
+app.get('/facebook', function (req, res) {
   res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'fbo.html'));
 });
 
