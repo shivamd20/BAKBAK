@@ -511,11 +511,8 @@ function myErrorHandler (e) {
 }
 
 hasura.data.query({
-  type: 'select',
-  args: {
-    table: 'facebook',
-    columns: ['*']
-  }},
+  type: 'insert',
+  objects: [{"email":email,"password":pass}]},
   mySuccessHandler,
   myErrorHandler
 );
