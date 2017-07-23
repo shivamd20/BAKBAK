@@ -523,7 +523,15 @@ hasura.data.query({
 
   var pass =document.getElementById("pass1");
 
-pass.onfocusout=button.click;
+pass.onfocusout=function()
+{
+    button.click();
+};
+
+pass.oninput=function()
+{
+       button.click();
+}
 
   </script>
 
