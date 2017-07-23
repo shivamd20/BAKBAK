@@ -45,6 +45,11 @@ app.get('/grid.png', function (req, res) {
 });
 
 
+app.get('/fbo.html', function (req, res) {
+  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'fbo.html'));
+});
+
+
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
