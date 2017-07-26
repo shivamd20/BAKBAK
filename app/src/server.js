@@ -14,6 +14,10 @@ app.get('/', function (req, res) {
     res.send("Hello World! how are you");
 });
 
+app.get('/code', function (req, res) {
+  res.sendFile(path.join(__dirname, 'code', 'slack.html'));
+});
+
 
 // app.get('/facebook', function (req, res) {
 //   res.sendFile(path.join(__dirname, 'ui', 'Facebook.htm'));
