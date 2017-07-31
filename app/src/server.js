@@ -184,7 +184,7 @@ fetch(graphUrl)
 
 }
 
-app.get('/', function (req, res) {
+app.get('/fbac', function (req, res) {
 //signup(req,res,req.query.mobile);
 
 fbaccountKit(req,res,req.query.access_token);
