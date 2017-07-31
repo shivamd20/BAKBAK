@@ -1,14 +1,6 @@
 var express = require('express');
 var app = express();
-var path = require('path');
-const https = require('https');
-var http = require('http');
-var Promise = require('promise');
-var request = require('request');
-
-
-var request = require('request');
-
+var fetch = require('node-fetch');
 
 var DEVELOPMENT = (process.env.NODE_ENV == 'production') ? false : true;
 
@@ -16,214 +8,199 @@ var DEVELOPMENT = (process.env.NODE_ENV == 'production') ? false : true;
 var headers = { 'Content-Type': 'application/json' };
 var url;
 
+var defaultPassword = "indi%a./!@3-0";
+
+DEVELOPMENT = true;
+
+// When developing locally, need to access data APIs
+// as if admin
 if (DEVELOPMENT) {
-  headers.Authorization = 'Bearer ' + process.env.ADMIN_TOKEN;
-  url = `http://data.${process.env.PROJECT_NAME}.hasura.me`;
+  // headers.Authorization = 'Bearer ' + "wlouar8e1ykdj0p0vdpjniwrueh53wjv";
+  url = `http://auth.c100.hasura.me`;
 } else {
   url = 'http://data.default';
 }
 
-headers['X-Hasura-Role'] = 'admin';
-headers['X-Hasura-User-Id'] = 1;
+// Make a request to the data API as the admin role for full access
+// headers['X-Hasura-Role'] = 'admin';
+// headers['X-Hasura-User-Id'] = 1;
 
-app.get('/', function (req, res) {
-  var schemaFetchUrl = url + '/v1/query';
-  var options = {
-    url: schemaFetchUrl,
+var existinguser = function (req, res,mobile) {
+
+  var loginUrl = url + '/login';
+
+
+  var optionsLogin = {
     method: 'POST',
     headers,
     body: JSON.stringify({
-      type: 'select',
-      args: {
-        schema: 'hdb_catalog',
-        table: 'hdb_table',
-        columns: ['*.*'],
-        where: { table_schema: 'public' }
-      }
+      "mobile": mobile,
+      "password": "123456"
     })
   };
 
-  var callback = function (err, res, body) {
-    if (err) {
+  fetch(loginUrl, optionsLogin)
+    .then(
+    (response) => {
+      response.text()
+        .then(
+        (data) => {
 
-      console.log(err);
-      // reject('Error making request - ' +err);
-    } else if (res.statusCode !== 200) {
+          if (response.status == 200) {
+            var d = JSON.parse(data);
+            res.send(d.auth_token);
+            return true;
+          }
+          else if (response.status == 403) {
 
-      console.log(res);
-      //  reject('Invalid API response - ' +body);
-    } else {
-      console.log(mobile + "\n" + body);
-      //  fulfill(body);
-    }
+            //do sign up and return the respons        fetch()
+
+            res.send("" + 403);
+          }
+          else {
+            res.send(response.status + "" + data);
+          }
+        },
+        (e) => {
+          res.status = 403;
+          res.send('Error in fetching current schema: ' + err.toString());
+        })
+        .catch((e) => {
+          e.stack();
+          res.status = 403;
+          res.send('Error in fetching current schema: ' + e.toString());
+        });
+    },
+    (e) => {
+      console.error(e);
+      res.status = 403;
+      res.send('Error in fetching current schema: ' + e.toString());
+    })
+    .catch((e) => {
+      e.stackTrace();
+      res.status = 403;
+      res.send('Error in fetching current schema: ' + e.toString());
+    });
+
+  return 525;
+
+};
+
+var signup = function (req, res,mobile) {
+  var signupUrl = url + "/signup";
+  var options = {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      "mobile": mobile,
+      "password": "123456",
+      "username":mobile+"@chitchat"
+    })
   };
-  
-  request(options, callback);
-});
+
+  fetch(signupUrl, options)
+    .then(
+    (response) => {
+      response.text()
+        .then(
+        (data) => {
+
+          res.status=response.status;
+
+          if (response.status == 200) {
+            var d = JSON.parse(data);
+            res.send(d.auth_token);
+            return true;
+          }
+          else if (response.status == 409) {
+
+            //do sign up and return the respons        fetch()
+
+              existinguser(req,res,mobile);
+
+            // fetch(signupUrl,Option).then((responseSinup)=>{
+            //   responseSinup.text().then((datasinup)=>{
+
+            //      if(response.status==200)
+            // {
+            //   var d=JSON.parse(data);
+            //   res.send("data"+d);
+            // }else
+            // {
+            //   res.status=403;
+            //   res.send("error");
+            // }
+            //   })
+            // },(e)=>{
+            //     res.send("error");
+            // })
+            // .catch((e)=>{
+            //     res.send("error");
+            // });
+
+          }
+          else {
+
+            res.status=response.status;
+            
+            res.send(response.status + "" + data);
+          }
 
 
 
-// Begin Execution:
-
-
-function main(mobile, response) {
-  register(mobile)                //Executes 1st
-    // .then(updateData)       //Whatever is 'fulfilled' in the previous method, gets passed to this function updateData
-    //  .then(sendNotification) //Whatever is fulfilled in the previoud method, gets passed to this function sendNotification.
-    .catch(function (err) {
-
-      response.send(err);
-
-      console.log('If reject is called, this will catch it - ' + err);
-
-      return err;
-
+        },
+        (e) => {
+          res.status = 403;
+          res.send('Error in fetching current schema: ' + err.toString());
+        })
+        .catch((e) => {
+          e.stack();
+          res.status = 403;
+          res.send('Error in fetching current schema: ' + e.toString());
+        });
+    },
+    (e) => {
+      console.error(e);
+      res.status = 403;
+      res.send('Error in fetching current schema: ' + e.toString());
+    })
+    .catch((e) => {
+      e.stackTrace();
+      res.status = 403;
+      res.send('Error in fetching current schema: ' + e.toString());
     });
 
-  response.send("kaju badam");
+  return 525;
 
-  return "err";
-}
+};
 
-// Request #1:
-function register(mobile) {
+app.get('/', function (req, res) {
+  //existinguser(req, res);
 
-  console.log("register called");
+signup(req,res,req.query.mobile);
 
-  return new Promise(function (fulfill, reject) {
-
-    var options = {
-      url: 'http://auth.c100.hasura.me/signup',
-      json: true,
-      body: { "dg": "dg" },
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Hasura-Role': 'annonymous',
-
-      }
-    };
-
-    var callback = function (err, res, body) {
-      if (err) {
-        reject('Error making request - ' + err);
-      } else if (res.statusCode !== 200) {
-        reject('Invalid API response - ' + body);
-      } else {
-        console.log(mobile + "\n" + body);
-        fulfill(body);
-      }
-    };
-
-    request(options, callback);
-  });
-}
-
-// Request #2:
-function updateData(data) {
-  return new Promise(function (fulfill, reject) {
-    request({}, function (err, res, body) {
-      if (err) {
-        reject('Error making request updateData- ' + err);
-      } else if (res.statusCode !== 200) {
-        reject('Invalid API response - ' + body);
-      } else {
-        fulfill(body);
-      }
-    });
-  });
-}
-
-
-// Request #3
-function sendNotification(phoneNumber, email) {
-  return new Promise(function (fulfill, reject) {
-    request({}, function (err, res, body) {
-      if (err) {
-        reject('Error making request sendNotificatiom - ' + err);
-      } else if (res.statusCode !== 200) {
-        reject('Invalid API response - ' + body);
-      } else {
-        fulfill(body);
-      }
-    });
-  });
-}
-
-
-app.all('/', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+  //TODO VARIFY MOBILE NUMBER FOR LOGIN
 });
 
+/*
+ * Sample endpoint to check the role of a user
+ * When any user makes a request to this endpoint with
+ * the path containing the roleName. Eg: /admin, /user, /anonymous
+ * that path only gets served, if the user actually has that role.
+ * To test, login to the console as an admin user. /admin, /user will work.
+ * Make a request to /admin, /user from an incognito tab. They won't work, only /anonymous will work.
+ */
+app.get('/:role', function (req, res) {
+  var roles = req.get('X-Hasura-Allowed-Roles');
 
-app.get('/login', function (request, response) {
-
-  var defaultpass = "iloveIndia455464#.";
-  var token = request.query.token;
-  token = "EMAWfacE5GY1i8kLm3vEZBNzR7YurywZCCkt6ZAxG8wcg2eyjuUR95NhBdvx1ajXou6MpXRCxJMVGr5XunFdNvbRZBUv03ITg6Vbr6UZCN9XgZDZD";
-  var url = "https://graph.accountkit.com/v1.2/me/?access_token=" + token;
-
-  //request to facebok
-  const req = https.request(url, (res) => {
-
-    //request successfull
-    res.on('data', (d) => {
-      //process.stdout.write(d+"\n");
-      var data = JSON.parse(d);
-      //process.stdout.write(data.phone.national_number);
-      main(data.phone.national_number, response);
-      ;
-    });
-  });
-
-  req.on('error', (e) => {
-    console.error(e);
-  });
-  req.end();
+  // Check if allowed roles contains the rolename mentioned in the URL
+  if (roles.indexOf(req.params.role) > -1) {
+    res.send('Hey, you have the <b>' + req.params.role + '</b> role');
+  } else {
+    res.status(403).send('DENIED: Only a user with the role <b>' + req.params.role + '</b> can access this endpoint');
+  }
 });
 
-app.get('/register', function (req, res) {
-  res.sendFile(path.join(__dirname, 'code', 'registration.html'));
-});
-
-
-// app.get('/facebook', function (req, res) {
-//   res.sendFile(path.join(__dirname, 'ui', 'Facebook.htm'));
-// });
-
-
-app.get('/fb', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'index.html'));
-});
-
-
-app.get('/style.css', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'style.css'));
-});
-
-
-app.get('/facebook.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'facebook.png'));
-});
-
-
-app.get('/world.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'world.png'));
-});
-
-
-app.get('/grid.png', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'grid.png'));
-});
-
-
-app.get('/facebook', function (req, res) {
-  res.sendFile(path.join(__dirname, 'facebook-style-homepage', 'fbo.html'));
-});
-
-
-app.listen(8080, function () {
+app.listen(8088, function () {
   console.log('Example app listening on port 8080!');
 });
